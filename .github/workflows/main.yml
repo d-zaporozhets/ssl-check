@@ -1,0 +1,27 @@
+name: SSL Check
+on:
+  schedule:
+    - cron: '0 0 * * *'  # This will run the action every day at midnight
+
+jobs:
+  check_ssl:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyOpenSSL
+        
+    - name: Run script
+      run: python script.py
+      env:
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
