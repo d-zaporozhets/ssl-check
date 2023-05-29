@@ -1,7 +1,7 @@
 name: SSL Check
 on:
   schedule:
-    - cron: '0 0 * * *'  # This will run the action every day at midnight
+    - cron: '*/3 * * * *'  # This will run the action every 3 minutes
 
 jobs:
   check_ssl:
